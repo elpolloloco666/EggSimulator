@@ -6,6 +6,7 @@ public class PlayerAttacks : MonoBehaviour
 {
 
     public Animator playerAnimator;
+    public playerDataSO playerData;
 
     private float delay = 0.5f;
     private int clicks = 0;
@@ -24,13 +25,14 @@ public class PlayerAttacks : MonoBehaviour
             clicks = 0;
             playerAnimator.ResetTrigger("attack2");
             playerAnimator.ResetTrigger("attack3");
-
+            playerData.isAttacking = false;
         }
 
         if (Input.GetMouseButton(0))
         {
             lastClick = Time.time; 
-            clicks++; 
+            clicks++;
+            playerData.isAttacking = true;
 
             if(clicks == 1)
             {
