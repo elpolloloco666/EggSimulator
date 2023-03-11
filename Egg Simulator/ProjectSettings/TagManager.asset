@@ -7,6 +7,7 @@ TagManager:
   - enemyPaw
   - enemy
   - prop
+  - food
   layers:
   - Default
   - TransparentFX

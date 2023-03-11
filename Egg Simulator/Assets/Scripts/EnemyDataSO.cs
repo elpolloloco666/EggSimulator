@@ -32,5 +32,6 @@ public enum catState
     CHASE,
     ATTACK,
     RETREAT,
+    EAT,
     DEAD
 }

@@ -146,6 +146,7 @@ public class PlayerMovement : MonoBehaviour
         prop.GetComponent<BoxCollider>().isTrigger = false;
         prop.GetComponent<Rigidbody>().isKinematic = false;
         prop.GetComponent<Rigidbody>().AddForce(transform.forward * 8f + Vector3.up * 4f, ForceMode.Impulse);
+        if (prop.GetComponent<PropController>().isFood) prop.tag = "food"; 
         playerData.hasAProp = false;
         prop = null;
     }
@@ -172,6 +173,7 @@ public class PlayerMovement : MonoBehaviour
         if ((other.transform.CompareTag("prop") || other.transform.CompareTag("food")) && isPickingUp)
         {
             prop = other.gameObject;
+            prop.tag = "prop";
             other.GetComponent<BoxCollider>().isTrigger = true;
             other.transform.SetParent(hand.transform);
             other.transform.localPosition = other.GetComponent<PropController>().grabbedPosition;

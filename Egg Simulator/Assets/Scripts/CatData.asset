@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f338667f1e349c4db441e00004c6146, type: 3}
   m_Name: CatData
   m_EditorClassIdentifier: 
-  health: 0
-  currentState: 2
+  health: 100
+  currentState: 4

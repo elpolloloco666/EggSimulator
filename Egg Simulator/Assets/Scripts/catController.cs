@@ -12,10 +12,12 @@ public class catController : MonoBehaviour
     public EnemyDataSO catData;
 
     private Transform playerTransform;
+    public GameObject food;
     private float distance;
+    private Vector3 distanceVector;
     private float distanceToChase = 8.0f;
     private float distanceToAttack = 1.4f;
-    
+    private float distanceToEat = 1.7f;
 
     void Start()
     {
@@ -29,37 +31,59 @@ public class catController : MonoBehaviour
 
     void Update()
     {
-        Vector3 distanceVector = transform.position - playerTransform.position;
+        if (food != null)
+        {
+            distanceVector = transform.position - food.transform.position;
+        }else distanceVector = transform.position - playerTransform.position;
         distance = distanceVector.magnitude;
 
-        if (catData.currentState == catState.REST && distance <= distanceToChase)
+
+        if (food == null)
         {
-            catAnimator.SetBool("awake",true);
-            
+            if (catData.currentState == catState.REST && distance <= distanceToChase)
+            {
+                catAnimator.SetBool("awake", true);
+
+            }
+
+            if (catData.currentState == catState.CHASE && distance <= distanceToAttack && food == null)
+            {
+                catData.currentState = catState.ATTACK;
+            }
+
+            if (catData.currentState == catState.ATTACK && distance > distanceToAttack)
+            {
+                catData.currentState = catState.CHASE;
+            }
+
+            if (catData.currentState == catState.CHASE && distance > distanceToChase)
+            {
+
+                catData.currentState = catState.RETREAT;
+
+            }
+
+            if (catData.currentState == catState.RETREAT && distance < distanceToChase)
+            {
+                catData.currentState = catState.CHASE;
+
+            }
+
+           
+
         }
 
-        if (catData.currentState == catState.CHASE && distance <= distanceToAttack)
+        if (food != null && catData.currentState == catState.REST)
         {
-            catData.currentState = catState.ATTACK;
-        }
-
-        if (catData.currentState == catState.ATTACK && distance > distanceToAttack)
-        {
+            catAnimator.SetBool("awake", true);
             catData.currentState = catState.CHASE;
         }
 
-        if (catData.currentState == catState.CHASE && distance > distanceToChase)
+        if (catData.currentState == catState.CHASE && distance <= distanceToEat && food != null)
         {
-
-            catData.currentState = catState.RETREAT;
-
+            catData.currentState = catState.EAT;
         }
 
-        if (catData.currentState == catState.RETREAT && distance < distanceToChase)
-        {
-            catData.currentState = catState.CHASE;
-
-        }
 
         if (catLife <= 0 && catData.currentState != catState.DEAD)
         {
@@ -67,7 +91,17 @@ public class catController : MonoBehaviour
             catData.currentState = catState.DEAD;
         }
 
-        
+
+
+        //////////////////////////////////////////////////////FOOD DETECTION///////////////////////////////////////////////////////////////
+        if (food == null)
+        {
+            Collider[] colliders = Physics.OverlapSphere(transform.position, 15f);
+            foreach (var collider in colliders)
+            {
+                if (collider.transform.CompareTag("food")) food = collider.gameObject;
+            }
+        }
 
         setState();
         
@@ -91,7 +125,8 @@ public class catController : MonoBehaviour
                 catAnimator.SetBool("chase", true);
                 catAnimator.ResetTrigger("revived");
                 catAnimator.ResetTrigger("onRestPosition");
-                catAgent.SetDestination(playerTransform.position);
+                if(food != null) catAgent.SetDestination(food.transform.position);
+                else catAgent.SetDestination(playerTransform.position);
                 break;
 
             case catState.ATTACK:
@@ -119,6 +154,14 @@ public class catController : MonoBehaviour
                 }
             
                 break;
+            case catState.EAT:
+                catAnimator.SetBool("rest", false);
+                catAnimator.SetBool("chase", false);
+                catAnimator.SetBool("attack", false);
+                catAnimator.ResetTrigger("revived");
+                catAnimator.ResetTrigger("onRestPosition");
+                catAnimator.SetBool("eating", true);
+                break;
 
             case catState.DEAD:
                 
@@ -127,6 +170,15 @@ public class catController : MonoBehaviour
                 
                 break;
         }
+    }
+
+    public void Eat()
+    {
+        Destroy(food);
+        food = null;
+        catAnimator.SetBool("eating", false);
+        catAgent.ResetPath();
+        catData.currentState = catState.CHASE; 
     }
 
     public IEnumerator WaitToRevive()
