@@ -17,7 +17,7 @@ public class catController : MonoBehaviour
     private Vector3 distanceVector;
     private float distanceToChase = 8.0f;
     private float distanceToAttack = 1.4f;
-    private float distanceToEat = 1.7f;
+    private float distanceToEat = 2.5f;
 
     void Start()
     {
