@@ -121,9 +121,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 77
-        width: 460
-        height: 137
+        y: 154
+        width: 920
+        height: 274
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,8 +131,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d485674da74a5d84bb40a088366a29db
-      internalID: -1101192641
+      spriteID: 0872a06814070004c8a409cccdafed5e
+      internalID: -944250991
       vertices: []
       indices: 
       edges: []
@@ -141,10 +141,10 @@ TextureImporter:
       name: restart button_1
       rect:
         serializedVersion: 2
-        x: 471
-        y: 83
-        width: 460
-        height: 131
+        x: 937
+        y: 154
+        width: 920
+        height: 274
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,8 +152,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: de9a886cdd0492c4ba0b8ac545835676
-      internalID: 1907865847
+      spriteID: b51c5639eba20084497204d543caa68f
+      internalID: 2090443345
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: ca5d2895c19f27d40867dd4b81199a05
+    spriteID: 0055c7e590c6e0641951bb030ca140df
     internalID: 0
     vertices: []
     indices: 
@@ -169,8 +169,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      restart button_0: -1101192641
-      restart button_1: 1907865847
+      restart button_0: -944250991
+      restart button_1: 2090443345
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

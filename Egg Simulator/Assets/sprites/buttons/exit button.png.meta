@@ -121,9 +121,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 230
-        width: 1381
-        height: 415
+        y: 154
+        width: 920
+        height: 274
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,8 +131,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2e754bf4c46b3da49a51ba6eaf4c9a9f
-      internalID: -1036935599
+      spriteID: 2fc9ec0de46adfc42b17dbddf04a0faa
+      internalID: -99161663
       vertices: []
       indices: 
       edges: []
@@ -141,10 +141,10 @@ TextureImporter:
       name: exit button_1
       rect:
         serializedVersion: 2
-        x: 1414
-        y: 248
-        width: 1381
-        height: 397
+        x: 943
+        y: 154
+        width: 920
+        height: 274
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,8 +152,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0a7cef6b9a1ffb8449b072a33ffbadd6
-      internalID: 1423663646
+      spriteID: 9d9bdcfdca02132428eb9971f2fe957b
+      internalID: 1666078340
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: bd7c9c888f9e3984480e79e3d37d09f0
+    spriteID: b966ef94ca414094c833de827ee319ea
     internalID: 0
     vertices: []
     indices: 
@@ -169,8 +169,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      exit button_0: -1036935599
-      exit button_1: 1423663646
+      exit button_0: -99161663
+      exit button_1: 1666078340
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

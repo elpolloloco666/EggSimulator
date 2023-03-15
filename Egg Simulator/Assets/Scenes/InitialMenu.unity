@@ -528,7 +528,7 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 517217001, guid: cf06ce5bbd42ba8459b15d8894b30bf9, type: 3}
+    m_PressedSprite: {fileID: -1273018523, guid: cf06ce5bbd42ba8459b15d8894b30bf9, type: 3}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
@@ -562,7 +562,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 278186378, guid: cf06ce5bbd42ba8459b15d8894b30bf9, type: 3}
+  m_Sprite: {fileID: 1076948567, guid: cf06ce5bbd42ba8459b15d8894b30bf9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1204,7 +1204,7 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 1423663646, guid: 7f4aa7a4ae48f3149897605449810a1e, type: 3}
+    m_PressedSprite: {fileID: 1666078340, guid: 7f4aa7a4ae48f3149897605449810a1e, type: 3}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
@@ -1238,7 +1238,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1036935599, guid: 7f4aa7a4ae48f3149897605449810a1e, type: 3}
+  m_Sprite: {fileID: -99161663, guid: 7f4aa7a4ae48f3149897605449810a1e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1271,6 +1271,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1198007595}
   - component: {fileID: 1198007594}
+  - component: {fileID: 1198007596}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -1355,6 +1356,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &1198007596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198007593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!4 &1472491783 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7756507192740482762, guid: a11b5d3b7995272448c8a708151488c9, type: 3}
@@ -1468,7 +1489,7 @@ RectTransform:
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1632621276
 Animator:
-  serializedVersion: 5
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1485,7 +1506,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1632621277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1923,7 +1944,7 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: -215849983, guid: 64039f8049e63234bae12601958f80b7, type: 3}
+    m_PressedSprite: {fileID: -752557276, guid: 64039f8049e63234bae12601958f80b7, type: 3}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
@@ -1957,7 +1978,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1208554427, guid: 64039f8049e63234bae12601958f80b7, type: 3}
+  m_Sprite: {fileID: -702027898, guid: 64039f8049e63234bae12601958f80b7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

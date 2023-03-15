@@ -12,7 +12,7 @@ public class catController : MonoBehaviour
     public EnemyDataSO catData;
 
     private Transform playerTransform;
-    public GameObject food;
+    private GameObject food;
     private float distance;
     private Vector3 distanceVector;
     private float distanceToChase = 8.0f;
@@ -31,15 +31,12 @@ public class catController : MonoBehaviour
 
     void Update()
     {
-        if (food != null)
-        {
-            distanceVector = transform.position - food.transform.position;
-        }else distanceVector = transform.position - playerTransform.position;
-        distance = distanceVector.magnitude;
-
 
         if (food == null)
         {
+            distanceVector = transform.position - playerTransform.position;
+            distance = distanceVector.magnitude;
+
             if (catData.currentState == catState.REST && distance <= distanceToChase)
             {
                 catAnimator.SetBool("awake", true);
@@ -70,19 +67,23 @@ public class catController : MonoBehaviour
             }
 
            
-
-        }
-
-        if (food != null && catData.currentState == catState.REST)
+        }else
         {
-            catAnimator.SetBool("awake", true);
-            catData.currentState = catState.CHASE;
+            distanceVector = transform.position - food.transform.position;
+            distance = distanceVector.magnitude;
+
+            if (food != null && catData.currentState == catState.REST)
+            {
+                catAnimator.SetBool("awake", true);
+            }
+
+            if (catData.currentState == catState.CHASE && distance <= distanceToEat && food != null)
+            {
+                catData.currentState = catState.EAT;
+            }
         }
 
-        if (catData.currentState == catState.CHASE && distance <= distanceToEat && food != null)
-        {
-            catData.currentState = catState.EAT;
-        }
+        
 
 
         if (catLife <= 0 && catData.currentState != catState.DEAD)

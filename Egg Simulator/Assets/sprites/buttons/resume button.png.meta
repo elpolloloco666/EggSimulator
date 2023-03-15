@@ -121,18 +121,18 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 77
-        width: 460
-        height: 137
+        y: 154
+        width: 920
+        height: 274
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 288369ef2b9883c429aa55f7d9b07c14
-      internalID: -318774961
+      spriteID: a9f87089663c5044f851001527f7ed97
+      internalID: -808840611
       vertices: []
       indices: 
       edges: []
@@ -141,19 +141,19 @@ TextureImporter:
       name: resume button_1
       rect:
         serializedVersion: 2
-        x: 471
-        y: 83
-        width: 460
-        height: 131
+        x: 943
+        y: 154
+        width: 920
+        height: 274
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 730c2d6e06947fe4795fbcfcb6a50a7c
-      internalID: 772829107
+      spriteID: 39be58e6b40c3e045aa73cdc5f811c86
+      internalID: -1954327968
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 2776f20cbb276da48a1b07c4d4126615
+    spriteID: 73c47d12c4644dd46881d1693d97a70e
     internalID: 0
     vertices: []
     indices: 
@@ -169,8 +169,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      resume button_0: -318774961
-      resume button_1: 772829107
+      resume button_0: -808840611
+      resume button_1: -1954327968
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

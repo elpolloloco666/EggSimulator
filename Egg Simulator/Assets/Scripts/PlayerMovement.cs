@@ -157,15 +157,34 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void EndPropAttack()
-    {
+    {       
         playerData.isAttacking = false;
     }
+
+    public void FixUnwantedRotations()
+    {
+        transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
+       
+    } 
 
     private void OnCollisionEnter(Collision collision)
     {
         isJumping = false;
         applyForce = false;
-     
+
+        if (collision.transform.CompareTag("climbSurface"))
+        {
+            
+            playerAnimator.SetBool("climbing", true);
+            transform.rotation = Quaternion.LookRotation(-collision.contacts[0].normal);
+            
+        }
+        if(collision.transform.CompareTag("floor") && playerAnimator.GetFloat("speed") == -1)
+        {
+            playerAnimator.SetBool("climbing", false);
+            rb.AddForce(-transform.forward*20f,ForceMode.Impulse);
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -180,6 +199,11 @@ public class PlayerMovement : MonoBehaviour
             other.transform.localRotation = Quaternion.Euler(other.GetComponent<PropController>().grabbedRotation);
             other.GetComponent<Rigidbody>().isKinematic = true;
             playerData.hasAProp = true;
+        }
+
+        if (other.transform.CompareTag("topTowel"))
+        {           
+            playerAnimator.SetBool("climbing", false);
         }
     }
 }

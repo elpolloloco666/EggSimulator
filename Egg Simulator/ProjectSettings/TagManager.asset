@@ -8,6 +8,9 @@ TagManager:
   - enemy
   - prop
   - food
+  - climbSurface
+  - topTowel
+  - floor
   layers:
   - Default
   - TransparentFX
