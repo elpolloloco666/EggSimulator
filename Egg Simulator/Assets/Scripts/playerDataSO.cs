@@ -9,7 +9,8 @@ public class playerDataSO : ScriptableObject
     public float life;
     public float score;
     public bool isAttacking;
-    public bool hasAProp; 
+    public bool hasAProp;
+    public bool hasKey;
     public UnityEvent OnDataChange;
 
     public void TakeDamage(float damage)

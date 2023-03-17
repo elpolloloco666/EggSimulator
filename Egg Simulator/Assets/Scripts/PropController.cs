@@ -10,6 +10,7 @@ public class PropController : MonoBehaviour
     public EnemyDataSO catData;
     public playerDataSO playerData;
     public bool isFood;
+    public bool isKey;
 
     private void OnTriggerEnter(Collider other)
     {

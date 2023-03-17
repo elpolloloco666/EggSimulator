@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isJumping = false;
     private bool applyForce = false;
     private bool isPickingUp = false;
+    private bool isClimbing = false;
+    private bool isFalling = false;
     private float delay = 0.5f;
     private int clicks = 0;
     private float lastClick = 0;
@@ -24,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         playerData.hasAProp = false;
         playerData.life = 100;
+        playerData.hasKey = false;
     }
 
     
@@ -59,6 +62,7 @@ public class PlayerMovement : MonoBehaviour
             prop.transform.parent = null;
             prop.GetComponent<BoxCollider>().isTrigger = false;
             prop.GetComponent<Rigidbody>().isKinematic = false;
+            if (prop.GetComponent<PropController>().isKey) playerData.hasKey = false;
             playerData.hasAProp = false;
             prop = null;
             
@@ -104,6 +108,10 @@ public class PlayerMovement : MonoBehaviour
             
         }
 
+        /////////////////////////////////////////////FALL DAMAGE///////////////////////////////////////////////
+        
+        
+        if (rb.velocity.y <= -7) isFalling = true;
     }
 
     public void jumpforce()
@@ -146,7 +154,8 @@ public class PlayerMovement : MonoBehaviour
         prop.GetComponent<BoxCollider>().isTrigger = false;
         prop.GetComponent<Rigidbody>().isKinematic = false;
         prop.GetComponent<Rigidbody>().AddForce(transform.forward * 8f + Vector3.up * 4f, ForceMode.Impulse);
-        if (prop.GetComponent<PropController>().isFood) prop.tag = "food"; 
+        if (prop.GetComponent<PropController>().isFood) prop.tag = "food";
+        if (prop.GetComponent<PropController>().isKey) playerData.hasKey = false;
         playerData.hasAProp = false;
         prop = null;
     }
@@ -164,7 +173,8 @@ public class PlayerMovement : MonoBehaviour
     public void FixUnwantedRotations()
     {
         transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
-       
+        rb.AddForce(transform.forward * 20f, ForceMode.Impulse);
+        isClimbing = false;
     } 
 
     private void OnCollisionEnter(Collision collision)
@@ -177,12 +187,20 @@ public class PlayerMovement : MonoBehaviour
             
             playerAnimator.SetBool("climbing", true);
             transform.rotation = Quaternion.LookRotation(-collision.contacts[0].normal);
+            isClimbing = true;
             
         }
         if(collision.transform.CompareTag("floor") && playerAnimator.GetFloat("speed") == -1)
         {
             playerAnimator.SetBool("climbing", false);
             rb.AddForce(-transform.forward*20f,ForceMode.Impulse);
+            isClimbing = false;
+        }
+
+        if (collision.transform.CompareTag("floor") && isFalling)
+        {
+            playerData.TakeDamage(100);
+            isFalling = false;
         }
 
     }
@@ -199,11 +217,23 @@ public class PlayerMovement : MonoBehaviour
             other.transform.localRotation = Quaternion.Euler(other.GetComponent<PropController>().grabbedRotation);
             other.GetComponent<Rigidbody>().isKinematic = true;
             playerData.hasAProp = true;
+            if (prop.GetComponent<PropController>().isKey) playerData.hasKey = true;
         }
 
-        if (other.transform.CompareTag("topTowel"))
+        if (other.transform.CompareTag("topTowel") && isClimbing)
         {           
             playerAnimator.SetBool("climbing", false);
+            
+        }
+
+        if(other.transform.CompareTag("topTowel") && !isClimbing)
+        {
+            
+            isClimbing = true;
+            playerAnimator.SetBool("climbing", true);
+            transform.position = transform.position - new Vector3(0,2,0);
+            transform.rotation = Quaternion.LookRotation(-transform.forward);
+
         }
     }
 }
