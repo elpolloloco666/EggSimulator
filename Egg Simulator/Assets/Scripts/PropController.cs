@@ -8,6 +8,7 @@ public class PropController : MonoBehaviour
     public Vector3 grabbedRotation;
     public float attackPower;
     public EnemyDataSO catData;
+    public EnemyDataSO ratData;
     public playerDataSO playerData;
     public bool isFood;
     public bool isKey;
@@ -16,7 +17,15 @@ public class PropController : MonoBehaviour
     {
         if(other.transform.CompareTag("enemy") && playerData.isAttacking)
         {
-            catData.TakeDamage(attackPower);
+            if (other.gameObject.name == "gato")
+            {
+                catData.TakeDamage(10);
+            }
+
+            if (other.gameObject.name == "rata")
+            {
+                ratData.TakeDamage(10);
+            }
         }
     }
 

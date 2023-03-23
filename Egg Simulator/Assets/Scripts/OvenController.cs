@@ -7,7 +7,7 @@ public class OvenController : MonoBehaviour
 
     public GameObject[] fireArray;
     public float delay;
-    public float playDuation;
+    public float playDuration;
     
     void Start()
     {     
@@ -27,7 +27,7 @@ public class OvenController : MonoBehaviour
             fireArray[0].GetComponent<BoxCollider>().enabled = true;
             fireArray[1].GetComponent<ParticleSystem>().Play();
             fireArray[1].GetComponent<BoxCollider>().enabled = true;           
-            yield return new WaitForSeconds(playDuation);
+            yield return new WaitForSeconds(playDuration);
 
             fireArray[0].GetComponent<ParticleSystem>().Stop();
             fireArray[0].GetComponent<BoxCollider>().enabled = false;
@@ -38,7 +38,7 @@ public class OvenController : MonoBehaviour
             fireArray[2].GetComponent<BoxCollider>().enabled = true;
             fireArray[3].GetComponent<ParticleSystem>().Play();
             fireArray[3].GetComponent<BoxCollider>().enabled = true;
-            yield return new WaitForSeconds(playDuation);
+            yield return new WaitForSeconds(playDuration);
         }
     }
 

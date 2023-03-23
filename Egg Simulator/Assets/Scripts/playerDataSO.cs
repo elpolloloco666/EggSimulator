@@ -11,6 +11,7 @@ public class playerDataSO : ScriptableObject
     public bool isAttacking;
     public bool hasAProp;
     public bool hasKey;
+    public bool isClimbing; 
     public UnityEvent OnDataChange;
 
     public void TakeDamage(float damage)

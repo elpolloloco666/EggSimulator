@@ -13,9 +13,9 @@ public class PlayerMovement : MonoBehaviour
     private bool isJumping = false;
     private bool applyForce = false;
     private bool isPickingUp = false;
-    private bool isClimbing = false;
     private bool isFalling = false;
     private float delay = 0.5f;
+    private float previousY;
     private int clicks = 0;
     private float lastClick = 0;
     private GameObject prop;
@@ -26,7 +26,9 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         playerData.hasAProp = false;
         playerData.life = 100;
+        previousY = transform.position.y;
         playerData.hasKey = false;
+        playerData.isClimbing = false;
     }
 
     
@@ -72,9 +74,7 @@ public class PlayerMovement : MonoBehaviour
         {
             playerAnimator.SetTrigger("throw");
         }
-        
-        
-        
+          
 
         ////////////////////////////////////////////////ATTACKS/////////////////////////////////////////////////////////
         if (Time.time - lastClick > delay && !playerData.hasAProp)
@@ -111,7 +111,16 @@ public class PlayerMovement : MonoBehaviour
         /////////////////////////////////////////////FALL DAMAGE///////////////////////////////////////////////
         
         
-        if (rb.velocity.y <= -7) isFalling = true;
+        //if (rb.velocity.y <= -8) isFalling = true;
+        //float currentY = transform.position.y;
+        //float distanceFallen = previousY - currentY;
+
+        //if (distanceFallen > 0 && distanceFallen > 3)
+        //{
+        //    playerData.TakeDamage(50);
+        //}
+
+        //previousY = currentY;
     }
 
     public void jumpforce()
@@ -172,9 +181,10 @@ public class PlayerMovement : MonoBehaviour
 
     public void FixUnwantedRotations()
     {
+        
         transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
-        rb.AddForce(transform.forward * 20f, ForceMode.Impulse);
-        isClimbing = false;
+        rb.AddForce(transform.forward * 20f, ForceMode.Impulse);      
+        playerData.isClimbing = false;
     } 
 
     private void OnCollisionEnter(Collision collision)
@@ -187,20 +197,24 @@ public class PlayerMovement : MonoBehaviour
             
             playerAnimator.SetBool("climbing", true);
             transform.rotation = Quaternion.LookRotation(-collision.contacts[0].normal);
-            isClimbing = true;
+            transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
+
+            
+            playerData.isClimbing = true;
             
         }
         if(collision.transform.CompareTag("floor") && playerAnimator.GetFloat("speed") == -1)
         {
+            
             playerAnimator.SetBool("climbing", false);
             rb.AddForce(-transform.forward*20f,ForceMode.Impulse);
-            isClimbing = false;
+            playerData.isClimbing = false;
         }
 
-        if (collision.transform.CompareTag("floor") && isFalling)
+        if (collision.transform.CompareTag("floor") && collision.relativeVelocity.y >= 8)
         {
             playerData.TakeDamage(100);
-            isFalling = false;
+            
         }
 
     }
@@ -220,20 +234,22 @@ public class PlayerMovement : MonoBehaviour
             if (prop.GetComponent<PropController>().isKey) playerData.hasKey = true;
         }
 
-        if (other.transform.CompareTag("topTowel") && isClimbing)
+        if (other.transform.CompareTag("topTowel") && playerData.isClimbing)
         {           
             playerAnimator.SetBool("climbing", false);
             
         }
 
-        if(other.transform.CompareTag("topTowel") && !isClimbing)
+        if(other.transform.CompareTag("topTowel") && !playerData.isClimbing)
         {
-            
-            isClimbing = true;
+
+            playerData.isClimbing = true;
             playerAnimator.SetBool("climbing", true);
             transform.position = transform.position - new Vector3(0,2,0);
             transform.rotation = Quaternion.LookRotation(-transform.forward);
 
         }
+
+        
     }
 }

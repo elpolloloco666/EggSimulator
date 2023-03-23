@@ -9,7 +9,7 @@ public class CatAttack : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.transform.CompareTag("Player") && catData.currentState == catState.ATTACK)
+        if(collision.transform.CompareTag("Player") && catData.currentState == EnemyState.ATTACK)
         {
             playerdata.TakeDamage(10);
         }

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class playerAttackDamage : MonoBehaviour
 {
-    public EnemyDataSO enemyData;
+    public EnemyDataSO catData;
+    public EnemyDataSO ratData;
     public playerDataSO playerData;
 
   
@@ -13,7 +14,16 @@ public class playerAttackDamage : MonoBehaviour
     {
         if (other.transform.CompareTag("enemy") && playerData.isAttacking)
         {
-            enemyData.TakeDamage(10);
+            if(other.gameObject.name == "gato")
+            {
+                catData.TakeDamage(10);
+            }
+            
+            if(other.gameObject.name == "rata")
+            {
+                ratData.TakeDamage(10);
+            }
+            
 
         }
         if (other.transform.CompareTag("prop"))

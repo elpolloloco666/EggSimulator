@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemyDataSO : ScriptableObject
 {
     public float health;
-    public catState currentState;
+    public EnemyState currentState;
 
     public void TakeDamage(float damage)
     {
@@ -26,7 +26,7 @@ public class EnemyDataSO : ScriptableObject
 
 }
 
-public enum catState
+public enum EnemyState
 {
     REST,
     CHASE,
