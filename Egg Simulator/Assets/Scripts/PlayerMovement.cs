@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class PlayerMovement : MonoBehaviour
     private int clicks = 0;
     private float lastClick = 0;
     private GameObject prop;
+
+    [SerializeField] UnityEvent jumpEvent;
 
     void Start()
     {
@@ -48,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
         {
             playerAnimator.SetTrigger("jump");
             isJumping = true;
-            
+            jumpEvent.Invoke();
         }
 
         if (applyForce) transform.position = transform.position + transform.forward * Time.deltaTime * 2f;
@@ -108,19 +111,7 @@ public class PlayerMovement : MonoBehaviour
             
         }
 
-        /////////////////////////////////////////////FALL DAMAGE///////////////////////////////////////////////
         
-        
-        //if (rb.velocity.y <= -8) isFalling = true;
-        //float currentY = transform.position.y;
-        //float distanceFallen = previousY - currentY;
-
-        //if (distanceFallen > 0 && distanceFallen > 3)
-        //{
-        //    playerData.TakeDamage(50);
-        //}
-
-        //previousY = currentY;
     }
 
     public void jumpforce()

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: CatData
   m_EditorClassIdentifier: 
   health: 100
-  currentState: 4
+  currentState: 0

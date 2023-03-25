@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
+using UnityEngine.Events;
 public class catController : MonoBehaviour
 {
     public Animator catAnimator;
@@ -19,6 +19,8 @@ public class catController : MonoBehaviour
     private float distanceToAttack = 1.4f;
     private float distanceToEat = 2.5f;
     private float yAxisDistance;
+
+    [SerializeField] UnityEvent deathEvent;
 
     void Start()
     {
@@ -102,6 +104,7 @@ public class catController : MonoBehaviour
         if (catData.health <= 0 && catData.currentState != EnemyState.DEAD)
         {
             catAnimator.SetTrigger("death");
+            deathEvent.Invoke();
             catData.currentState = EnemyState.DEAD;
         }
 

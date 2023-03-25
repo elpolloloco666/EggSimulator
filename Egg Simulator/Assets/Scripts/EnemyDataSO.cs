@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [CreateAssetMenu(fileName = "EnemyData", menuName = "Enemy/EnemyDataSO")]
 public class EnemyDataSO : ScriptableObject
 {
     public float health;
     public EnemyState currentState;
+    
 
     public void TakeDamage(float damage)
     {

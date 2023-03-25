@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
+using UnityEngine.Events;
 public class RatController : MonoBehaviour
 {
     public Animator RatAnimator;
@@ -13,6 +13,8 @@ public class RatController : MonoBehaviour
     private float distance;
     private Vector2 distanceVector;
     private float yAxisDistance;
+
+    [SerializeField] UnityEvent deathEvent;
 
     void Start()
     {
@@ -59,6 +61,7 @@ public class RatController : MonoBehaviour
 
         if (ratData.health == 0)
         {
+            
             ratData.currentState = EnemyState.DEAD;
         }
 
@@ -91,12 +94,18 @@ public class RatController : MonoBehaviour
                 RatAnimator.SetBool("attack", true);
                 ratAgent.ResetPath();
                 RatAnimator.SetTrigger("Death");
+                StartCoroutine("waitToDestroy");
                 break;
         }
     }
 
-    
 
+    IEnumerator waitToDestroy()
+    {
+        deathEvent.Invoke();
+        yield return new WaitForSeconds(0.5f);
+        Destroy(this.gameObject);
+    }
 
     
 }
