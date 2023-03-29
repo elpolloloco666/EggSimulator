@@ -11,6 +11,7 @@ TagManager:
   - climbSurface
   - topTowel
   - floor
+  - trap
   layers:
   - Default
   - TransparentFX

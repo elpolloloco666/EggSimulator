@@ -10,6 +10,7 @@ public class catController : MonoBehaviour
     public Transform restPosition;
     public EnemyDataSO catData;
     public playerDataSO playerData;
+    public PlayerStatsSO playerStats;
 
     private Transform playerTransform;
     private GameObject food;
@@ -18,6 +19,7 @@ public class catController : MonoBehaviour
     private float distanceToChase = 10.0f;
     private float distanceToAttack = 1.4f;
     private float distanceToEat = 2.5f;
+    private bool deathSoundPlayed = false;
     private float yAxisDistance;
 
     [SerializeField] UnityEvent deathEvent;
@@ -104,7 +106,12 @@ public class catController : MonoBehaviour
         if (catData.health <= 0 && catData.currentState != EnemyState.DEAD)
         {
             catAnimator.SetTrigger("death");
-            deathEvent.Invoke();
+            if (!deathSoundPlayed)
+            {
+                deathEvent.Invoke();
+                deathSoundPlayed = true;
+            }
+            playerStats.AddDown();
             catData.currentState = EnemyState.DEAD;
         }
 
@@ -204,6 +211,7 @@ public class catController : MonoBehaviour
         catData.health = 100;
         catAnimator.SetTrigger("revived");
         catData.currentState = EnemyState.CHASE;
+        deathSoundPlayed = false;
     }
 
     public void startChase()

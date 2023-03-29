@@ -24,13 +24,13 @@ public class PropController : MonoBehaviour
 
             if (other.gameObject.name == "gato")
             {
-                catData.TakeDamage(10);
+                catData.TakeDamage(attackPower);
                 
             }
 
             if (other.gameObject.name == "rata")
             {
-                ratData.TakeDamage(10);
+                ratData.TakeDamage(attackPower);
             }
             
         }

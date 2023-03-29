@@ -7,6 +7,9 @@ using UnityEngine;
 public class EnemyDataSO : ScriptableObject
 {
     public float health;
+    public float attackPower;
+    public float initialAttackPower;
+    public float Powerindex;
     public EnemyState currentState;
     
 
@@ -18,13 +21,35 @@ public class EnemyDataSO : ScriptableObject
         
     }
 
-    public void TakeHeal(float heal)
+    public void IncreaseAttackPower()
     {
-        float currentLife = health + heal;
-        if (currentLife >= 100) health = 100;
-        else health += heal;
+        float currentAttackPower = attackPower + Powerindex;
+        if (currentAttackPower >= 35) attackPower = 35;
+        else attackPower += Powerindex;
+    }
+
+    public void DecreaseAttackPower()
+    {
+        float currentAttackPower = attackPower - Powerindex;
+        if (currentAttackPower <= 5) attackPower = 5;
+        else attackPower -= Powerindex;
         
     }
+
+    public void ResetAttackPower()
+    {
+        attackPower = initialAttackPower;
+    }
+
+
+
+    //public void TakeHeal(float heal)
+    //{
+    //    float currentLife = health + heal;
+    //    if (currentLife >= 100) health = 100;
+    //    else health += heal;
+
+    //}
 
 }
 

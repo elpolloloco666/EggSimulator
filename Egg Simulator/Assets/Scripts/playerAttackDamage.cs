@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class playerAttackDamage : MonoBehaviour
 {
@@ -8,12 +9,14 @@ public class playerAttackDamage : MonoBehaviour
     public EnemyDataSO ratData;
     public playerDataSO playerData;
 
-  
+    [SerializeField] UnityEvent hitEvent;
+
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.CompareTag("enemy") && playerData.isAttacking)
+        if (other.transform.CompareTag("enemy") && playerData.isAttacking && !playerData.hasAProp)
         {
+            hitEvent.Invoke();
             if(other.gameObject.name == "gato")
             {
                 catData.TakeDamage(10);
@@ -26,19 +29,11 @@ public class playerAttackDamage : MonoBehaviour
             
 
         }
-        if (other.transform.CompareTag("prop"))
-        {
-            //Debug.Log("prop");
-        }
+        
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.transform.CompareTag("prop"))
-        {
-            //Debug.Log("prop");
-        }
-    }
+    
+    
 
    
 }

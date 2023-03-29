@@ -8,12 +8,28 @@ public class audioManager : MonoBehaviour
     public AudioClip[] musicCollection;
     public AudioClip[] sfxCollection;
     public AudioSource musica;
-    public AudioSource SFX;
-    
+    public AudioSource EnemySfx;
+    public AudioSource PlayerSfx;
+    public AudioSource LevelSfx;
+    public AudioSource UISfx;
 
-    public void playEffect(int SFXIndex)
+    public void playEnemyEffect(int SFXIndex)
     {
-        SFX.Stop();
-        if(!SFX.isPlaying) SFX.PlayOneShot(sfxCollection[SFXIndex]);
+        EnemySfx.Stop();
+        if(!EnemySfx.isPlaying) EnemySfx.PlayOneShot(sfxCollection[SFXIndex]);
     }
+
+    public void playPlayerEffect(int SFXIndex)
+    {
+        PlayerSfx.Stop();
+        if (!PlayerSfx.isPlaying) PlayerSfx.PlayOneShot(sfxCollection[SFXIndex]);
+    }
+
+    public void playLevelEffect(int SFXIndex)
+    {
+        LevelSfx.Stop();
+        if (!LevelSfx.isPlaying) LevelSfx.PlayOneShot(sfxCollection[SFXIndex]);
+    }
+
+
 }

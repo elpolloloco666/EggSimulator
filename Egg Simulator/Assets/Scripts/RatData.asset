@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: RatData
   m_EditorClassIdentifier: 
   health: 100
-  currentState: 2
+  attackPower: 5
+  initialAttackPower: 5
+  Powerindex: 2.5
+  currentState: 0

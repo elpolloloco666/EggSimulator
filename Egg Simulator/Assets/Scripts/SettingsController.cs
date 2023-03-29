@@ -21,5 +21,6 @@ public class SettingsController : MonoBehaviour
     public void setSFXVolume(float value)
     {
         mixer.SetFloat("SFXVolume", value);
+        mixer.SetFloat("UIVolume", value);
     }
 }

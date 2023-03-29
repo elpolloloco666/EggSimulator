@@ -20,8 +20,12 @@ public class PlayerMovement : MonoBehaviour
     private int clicks = 0;
     private float lastClick = 0;
     private GameObject prop;
+    private bool deathSoundPlayed = false;
 
     [SerializeField] UnityEvent jumpEvent;
+    [SerializeField] UnityEvent grabEvent;
+    [SerializeField] UnityEvent damageEvent;
+    [SerializeField] UnityEvent DeathEvent;
 
     void Start()
     {
@@ -37,78 +41,94 @@ public class PlayerMovement : MonoBehaviour
     
     void Update()
     {
-        ////////////////////////////////////////////////MOVEMENT//////////////////////////////////////////////////////
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-
-        playerAnimator.SetFloat("speed",Input.GetAxis("Vertical"));
-        playerAnimator.SetFloat("direction",Input.GetAxis("Horizontal"));
-
-        if (Input.GetKey(KeyCode.LeftShift)) playerAnimator.SetBool("running", true); 
-        else playerAnimator.SetBool("running", false);
-
-        if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
-        {
-            playerAnimator.SetTrigger("jump");
-            isJumping = true;
-            jumpEvent.Invoke();
-        }
-
-        if (applyForce) transform.position = transform.position + transform.forward * Time.deltaTime * 2f;
-
-        if (Input.GetKeyDown(KeyCode.E) && !playerData.hasAProp)
-        {
-            playerAnimator.SetTrigger("pickUp");
-            isPickingUp = true;
-        } else
-        if(Input.GetKeyDown(KeyCode.E) && playerData.hasAProp)
+        if (playerData.life > 0)
         {
 
-            prop.transform.parent = null;
-            prop.GetComponent<BoxCollider>().isTrigger = false;
-            prop.GetComponent<Rigidbody>().isKinematic = false;
-            if (prop.GetComponent<PropController>().isKey) playerData.hasKey = false;
-            playerData.hasAProp = false;
-            prop = null;
-            
-        }
+            ////////////////////////////////////////////////MOVEMENT//////////////////////////////////////////////////////
+            float horizontalInput = Input.GetAxis("Horizontal");
+            float verticalInput = Input.GetAxis("Vertical");
 
-        if(Input.GetKeyDown(KeyCode.R) && playerData.hasAProp)
-        {
-            playerAnimator.SetTrigger("throw");
-        }
-          
+            playerAnimator.SetFloat("speed", Input.GetAxis("Vertical"));
+            playerAnimator.SetFloat("direction", Input.GetAxis("Horizontal"));
 
-        ////////////////////////////////////////////////ATTACKS/////////////////////////////////////////////////////////
-        if (Time.time - lastClick > delay && !playerData.hasAProp)
-        {
-            clicks = 0;
-            playerAnimator.ResetTrigger("attack2");
-            playerAnimator.ResetTrigger("attack3");
-            playerData.isAttacking = false;
-        }
+            if (Input.GetKey(KeyCode.LeftShift)) playerAnimator.SetBool("running", true);
+            else playerAnimator.SetBool("running", false);
 
-        if (Input.GetMouseButtonDown(0) && !playerData.hasAProp)
-        {
-            lastClick = Time.time;
-            clicks++;
-            playerData.isAttacking = true;
-
-            
-            if(clicks == 1)
+            if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
             {
-                playerAnimator.SetTrigger("attack1");
+                playerAnimator.SetTrigger("jump");
+                isJumping = true;
+                jumpEvent.Invoke();
             }
-            
 
-            clicks = Mathf.Clamp(clicks, 0, 3);
+            if (applyForce) transform.position = transform.position + transform.forward * Time.deltaTime * 2f;
 
+            if (Input.GetKeyDown(KeyCode.E) && !playerData.hasAProp)
+            {
+                playerAnimator.SetTrigger("pickUp");
+                isPickingUp = true;
+                grabEvent.Invoke();
+            }
+            else
+            if (Input.GetKeyDown(KeyCode.E) && playerData.hasAProp)
+            {
+
+                prop.transform.parent = null;
+                prop.GetComponent<BoxCollider>().enabled = true;
+                prop.GetComponent<BoxCollider>().isTrigger = false;
+                prop.GetComponent<Rigidbody>().isKinematic = false;
+                if (prop.GetComponent<PropController>().isKey) playerData.hasKey = false;
+                playerData.hasAProp = false;
+                prop = null;
+
+            }
+
+            if (Input.GetKeyDown(KeyCode.R) && playerData.hasAProp)
+            {
+                playerAnimator.SetTrigger("throw");
+            }
+
+
+            ////////////////////////////////////////////////ATTACKS/////////////////////////////////////////////////////////
+            if (Time.time - lastClick > delay && !playerData.hasAProp)
+            {
+                clicks = 0;
+                playerAnimator.ResetTrigger("attack2");
+                playerAnimator.ResetTrigger("attack3");
+                playerData.isAttacking = false;
+            }
+
+            if (Input.GetMouseButtonDown(0) && !playerData.hasAProp)
+            {
+                lastClick = Time.time;
+                clicks++;
+                playerData.isAttacking = true;
+
+
+                if (clicks == 1)
+                {
+                    playerAnimator.SetTrigger("attack1");
+                }
+
+
+                clicks = Mathf.Clamp(clicks, 0, 3);
+
+            }
+
+            if (Input.GetMouseButtonDown(0) && playerData.hasAProp)
+            {
+                playerAnimator.SetTrigger("sword-attack");
+
+            }
         }
-
-        if (Input.GetMouseButtonDown(0) && playerData.hasAProp)
+        else
         {
-            playerAnimator.SetTrigger("sword-attack");
-            
+            if (!deathSoundPlayed)
+            {
+                DeathEvent.Invoke();
+                deathSoundPlayed = true;
+            }
+            playerAnimator.SetTrigger("death");            
         }
 
         
@@ -151,6 +171,7 @@ public class PlayerMovement : MonoBehaviour
     public void Throw()
     {
         prop.transform.parent = null;
+        prop.GetComponent<BoxCollider>().enabled = true;
         prop.GetComponent<BoxCollider>().isTrigger = false;
         prop.GetComponent<Rigidbody>().isKinematic = false;
         prop.GetComponent<Rigidbody>().AddForce(transform.forward * 8f + Vector3.up * 4f, ForceMode.Impulse);
@@ -163,11 +184,13 @@ public class PlayerMovement : MonoBehaviour
     public void StartPropAttack()
     {
         playerData.isAttacking = true;
+        prop.GetComponent<BoxCollider>().enabled = true;
     }
 
     public void EndPropAttack()
     {       
         playerData.isAttacking = false;
+        prop.GetComponent<BoxCollider>().enabled = false;
     }
 
     public void FixUnwantedRotations()
@@ -208,6 +231,11 @@ public class PlayerMovement : MonoBehaviour
             
         }
 
+        if (collision.transform.CompareTag("trap"))
+        {
+            damageEvent.Invoke();
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -217,6 +245,7 @@ public class PlayerMovement : MonoBehaviour
             prop = other.gameObject;
             prop.tag = "prop";
             other.GetComponent<BoxCollider>().isTrigger = true;
+            prop.GetComponent<BoxCollider>().enabled = false;
             other.transform.SetParent(hand.transform);
             other.transform.localPosition = other.GetComponent<PropController>().grabbedPosition;
             other.transform.localRotation = Quaternion.Euler(other.GetComponent<PropController>().grabbedRotation);

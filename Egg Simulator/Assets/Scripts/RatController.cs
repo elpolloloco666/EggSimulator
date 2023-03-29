@@ -8,11 +8,13 @@ public class RatController : MonoBehaviour
     public Animator RatAnimator;
     public NavMeshAgent ratAgent;
     public EnemyDataSO ratData;
+    public PlayerStatsSO playerStats;
 
     private Transform playerTransform;
     private float distance;
     private Vector2 distanceVector;
     private float yAxisDistance;
+    private bool deathSoundPlayed = false;
 
     [SerializeField] UnityEvent deathEvent;
 
@@ -94,6 +96,13 @@ public class RatController : MonoBehaviour
                 RatAnimator.SetBool("attack", true);
                 ratAgent.ResetPath();
                 RatAnimator.SetTrigger("Death");
+                if (!deathSoundPlayed)
+                {
+                    deathEvent.Invoke();
+                    deathSoundPlayed = true;
+
+                }
+                playerStats.RatDown = true;
                 StartCoroutine("waitToDestroy");
                 break;
         }
@@ -101,9 +110,8 @@ public class RatController : MonoBehaviour
 
 
     IEnumerator waitToDestroy()
-    {
-        deathEvent.Invoke();
-        yield return new WaitForSeconds(0.5f);
+    {      
+        yield return new WaitForSeconds(1.5f);
         Destroy(this.gameObject);
     }
 

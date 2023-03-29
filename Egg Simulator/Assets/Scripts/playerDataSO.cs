@@ -7,7 +7,6 @@ using UnityEngine.Events;
 public class playerDataSO : ScriptableObject
 {
     public float life;
-    public float score;
     public bool isAttacking;
     public bool hasAProp;
     public bool hasKey;
