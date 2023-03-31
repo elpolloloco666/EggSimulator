@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-using UnityEngine.UI;
-using TMPro;
+using UnityEngine.Audio;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,6 +18,8 @@ public class GameManager : MonoBehaviour
     public string fileName;
     public EnemyDataSO catData;
     public EnemyDataSO ratData;
+    public AudioMixer mixer;
+    public AudioSettingsSO audioSettings;
 
     private StreamWriter sw;
     private StreamReader sr;
@@ -33,6 +34,10 @@ public class GameManager : MonoBehaviour
         currentState = GameState.PLAYING;
         playerStats.resetStats();
         setDifficulty();
+
+        mixer.SetFloat("musicVolume", audioSettings.musicVolume);
+        mixer.SetFloat("SFXVolume", audioSettings.SFXVolume);
+        mixer.SetFloat("UIVolume", audioSettings.SFXVolume);
     }
 
 

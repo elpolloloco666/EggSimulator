@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public playerDataSO playerData;
     public Rigidbody rb;
     public GameObject hand;
+    public ParticleSystem damageParticle;
 
     private bool isJumping = false;
     private bool applyForce = false;
@@ -20,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     private int clicks = 0;
     private float lastClick = 0;
     private GameObject prop;
-    private bool deathSoundPlayed = false;
+    private bool deathSoundPlayed = false; 
 
     [SerializeField] UnityEvent jumpEvent;
     [SerializeField] UnityEvent grabEvent;
@@ -228,11 +229,12 @@ public class PlayerMovement : MonoBehaviour
         if (collision.transform.CompareTag("floor") && collision.relativeVelocity.y >= 8)
         {
             playerData.TakeDamage(100);
-            
+            damageParticle.Play();
         }
 
         if (collision.transform.CompareTag("trap"))
         {
+            damageParticle.Play();
             damageEvent.Invoke();
         }
 

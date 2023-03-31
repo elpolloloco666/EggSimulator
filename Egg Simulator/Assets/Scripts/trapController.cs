@@ -8,6 +8,9 @@ public class trapController : MonoBehaviour
     public float damage;
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.CompareTag("Player")) playerData.TakeDamage(damage);
+        if (collision.transform.CompareTag("Player"))
+        {
+            playerData.TakeDamage(damage);
+        } 
     }
 }

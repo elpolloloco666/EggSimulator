@@ -10,6 +10,8 @@ public class EnemyDataSO : ScriptableObject
     public float attackPower;
     public float initialAttackPower;
     public float Powerindex;
+    public float maxAttackPower;
+    public float minAttackPower;
     public EnemyState currentState;
     
 
@@ -24,14 +26,14 @@ public class EnemyDataSO : ScriptableObject
     public void IncreaseAttackPower()
     {
         float currentAttackPower = attackPower + Powerindex;
-        if (currentAttackPower >= 35) attackPower = 35;
+        if (currentAttackPower >= maxAttackPower) attackPower = maxAttackPower;
         else attackPower += Powerindex;
     }
 
     public void DecreaseAttackPower()
     {
         float currentAttackPower = attackPower - Powerindex;
-        if (currentAttackPower <= 5) attackPower = 5;
+        if (currentAttackPower <= minAttackPower) attackPower = minAttackPower;
         else attackPower -= Powerindex;
         
     }
@@ -41,15 +43,6 @@ public class EnemyDataSO : ScriptableObject
         attackPower = initialAttackPower;
     }
 
-
-
-    //public void TakeHeal(float heal)
-    //{
-    //    float currentLife = health + heal;
-    //    if (currentLife >= 100) health = 100;
-    //    else health += heal;
-
-    //}
 
 }
 

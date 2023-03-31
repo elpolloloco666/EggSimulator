@@ -8,12 +8,7 @@ public class HUDController : MonoBehaviour
     public playerDataSO playerData;
     public Image lifebar;
     public Animator playerAnimator;
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+   
     void Update()
     {
         
