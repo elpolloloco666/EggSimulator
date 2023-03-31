@@ -15,9 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isJumping = false;
     private bool applyForce = false;
     private bool isPickingUp = false;
-    private bool isFalling = false;
     private float delay = 0.5f;
-    private float previousY;
     private int clicks = 0;
     private float lastClick = 0;
     private GameObject prop;
@@ -34,7 +32,6 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         playerData.hasAProp = false;
         playerData.life = 100;
-        previousY = transform.position.y;
         playerData.hasKey = false;
         playerData.isClimbing = false;
     }

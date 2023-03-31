@@ -189,7 +189,6 @@ public class catController : MonoBehaviour
                 
                 Vector3 distanceVector = transform.position - restPosition.position;
                 distance = distanceVector.magnitude;
-                Debug.Log(distance);
                 if (distance < 0.15)
                 {
                     catAnimator.SetTrigger("onRestPosition");

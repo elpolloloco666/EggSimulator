@@ -111,7 +111,7 @@ Transform:
   m_GameObject: {fileID: 1838004282623301338}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 5.02, y: 3.43, z: -0.73}
-  m_LocalScale: {x: 0.10000005, y: 0.13000004, z: 0.1}
+  m_LocalScale: {x: 0.10000006, y: 0.13000004, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5590498269931511252}
@@ -148,7 +148,25 @@ MonoBehaviour:
   grabbedRotation: {x: 0, y: 180, z: -100}
   attackPower: 5
   catData: {fileID: 11400000, guid: 018436b777c8cb34f8a6a4ae4fd624b3, type: 2}
+  ratData: {fileID: 11400000, guid: 9811144797e0bfe44a5ecc7edf376db1, type: 2}
   playerData: {fileID: 11400000, guid: 2170d3dd38c8d0346a424d4705f8740f, type: 2}
+  isFood: 1
+  isKey: 0
+  hitEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: audioManager, Assembly-CSharp
+        m_MethodName: playLevelEffect
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!54 &1838004282623301339
 Rigidbody:
   m_ObjectHideFlags: 0
